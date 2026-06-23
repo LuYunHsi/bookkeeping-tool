@@ -3,47 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="網頁版記帳網站，支援本地儲存、圖表分析與理財建議。" />
-  <title>記帳小幫手</title>
+  <title>極致專業版 · 記帳小幫手</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root { color-scheme: light; }
     body {
       background:
-        radial-gradient(circle at top left, rgba(251, 191, 36, 0.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(59, 130, 246, 0.12), transparent 24%),
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.15), transparent 30%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 25%),
         linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
     }
     .glass-card {
       backdrop-filter: blur(14px);
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.85);
     }
   </style>
 </head>
 <body class="min-h-screen text-slate-800">
+
   <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <header class="mb-6 overflow-hidden rounded-3xl border border-white/70 bg-slate-950 text-white shadow-2xl shadow-slate-900/10">
+    <header class="mb-6 overflow-hidden rounded-3xl border border-white/70 bg-slate-950 text-white shadow-xl">
       <div class="grid gap-6 px-6 py-8 md:grid-cols-[1.3fr_0.7fr] md:px-10 md:py-10">
         <div>
-          <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-amber-200">Vanilla JS · localStorage · Chart.js</span>
-          <h1 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">記帳小幫手</h1>
-          <p class="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
-            一個單頁式的網頁版記帳網站，整合儀表板、表單、歷史清單與理財建議。
+          <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-amber-200">Vanilla JS · localStorage · Chart.js</span>
+          <h1 class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">財務記帳小幫手</h1>
+          <p class="mt-2 text-sm text-slate-300">
+            全功能單頁式理財系統。支援本地儲存、動態雙流向分類、圖表分析與智慧理財建議。
           </p>
         </div>
         <div class="grid gap-3 sm:grid-cols-3 md:grid-cols-1 xl:grid-cols-3">
           <article class="rounded-2xl bg-white/10 p-4 ring-1 ring-white/10">
             <p class="text-xs text-slate-300">本月總收入</p>
-            <p id="summaryIncome" class="mt-2 text-2xl font-semibold">$0</p>
+            <p id="summaryIncome" class="mt-2 text-2xl font-bold text-emerald-400">$0</p>
           </article>
           <article class="rounded-2xl bg-white/10 p-4 ring-1 ring-white/10">
             <p class="text-xs text-slate-300">本月總支出</p>
-            <p id="summaryExpense" class="mt-2 text-2xl font-semibold">$0</p>
+            <p id="summaryExpense" class="mt-2 text-2xl font-bold text-rose-400">$0</p>
           </article>
           <article class="rounded-2xl bg-white/10 p-4 ring-1 ring-white/10">
             <p class="text-xs text-slate-300">剩餘預算</p>
-            <p id="summaryBalance" class="mt-2 text-2xl font-semibold">$0</p>
+            <p id="summaryBalance" class="mt-2 text-2xl font-bold text-amber-300">$0</p>
           </article>
         </div>
       </div>
@@ -51,16 +51,16 @@
 
     <main class="grid gap-6 xl:grid-cols-[1.4fr_0.9fr]">
       <section class="space-y-6">
-        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-xl shadow-slate-900/5 sm:p-6">
+        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-lg sm:p-6">
           <div class="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 class="text-xl font-semibold text-slate-900">儀表板</h2>
-              <p class="mt-1 text-sm text-slate-500">檢視本月收支、分類分布與趨勢變化。</p>
+              <h2 class="text-xl font-bold text-slate-900">數據儀表板</h2>
+              <p class="mt-1 text-sm text-slate-500">檢視本月分類分布與收支趨勢。</p>
             </div>
             <div class="w-full max-w-sm">
               <div class="mb-2 flex items-center justify-between text-sm">
-                <span class="font-medium text-slate-600">預算進度</span>
-                <span id="budgetText" class="font-semibold text-slate-900">$0 / $0</span>
+                <span class="font-medium text-slate-600">預算進度條</span>
+                <span id="budgetText" class="font-bold text-slate-900">$0 / $0</span>
               </div>
               <div class="h-3 overflow-hidden rounded-full bg-slate-200">
                 <div id="budgetBar" class="h-full w-0 rounded-full bg-emerald-500 transition-all duration-300"></div>
@@ -68,87 +68,330 @@
               <p id="budgetHint" class="mt-2 text-xs text-slate-500">尚未設定每月預算。</p>
             </div>
           </div>
+          
           <div class="grid gap-5 lg:grid-cols-2">
             <article class="rounded-2xl border border-slate-200 bg-white p-4">
-              <div class="mb-3 flex items-center justify-between">
-                <h3 class="font-semibold text-slate-900">支出分類圓餅圖</h3>
-              </div>
-              <div class="h-72"><canvas id="expenseCategoryChart"></canvas></div>
+              <h3 class="font-bold text-slate-900 mb-2">支出分類圓餅圖</h3>
+              <div class="h-64"><canvas id="expenseCategoryChart"></canvas></div>
             </article>
             <article class="rounded-2xl border border-slate-200 bg-white p-4">
-              <div class="mb-3 flex items-center justify-between">
-                <h3 class="font-semibold text-slate-900">每月收支趨勢</h3>
-              </div>
-              <div class="h-72"><canvas id="monthlyTrendChart"></canvas></div>
+              <h3 class="font-bold text-slate-900 mb-2">每日收支趨勢</h3>
+              <div class="h-64"><canvas id="monthlyTrendChart"></canvas></div>
             </article>
           </div>
         </section>
 
-        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-xl shadow-slate-900/5 sm:p-6">
+        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-lg sm:p-6">
           <div class="mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 class="text-xl font-semibold text-slate-900">記帳表單</h2>
-              <p class="mt-1 text-sm text-slate-500">快速新增一筆收入或支出。</p>
+              <h2 class="text-xl font-bold text-slate-900">新增收支紀錄</h2>
+              <p class="mt-1 text-sm text-slate-500">輸入完點擊儲存，金額會自動歸類到對應的流向喔！</p>
             </div>
-            <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
               <label class="block">
-                <span class="mb-1 block text-sm font-medium text-slate-700">每月總預算</span>
-                <input id="budgetInput" type="number" min="0" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none" placeholder="例如 30000" />
+                <span class="mb-1 block text-xs font-medium text-slate-600">設定每月預算</span>
+                <input id="budgetInput" type="number" min="0" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none" placeholder="例如 30000" />
               </label>
-              <button id="saveBudgetBtn" type="button" class="mt-auto rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-700">儲存預算</button>
+              <button id="saveBudgetBtn" type="button" class="mt-auto rounded-xl bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800">儲存預算</button>
             </div>
           </div>
 
           <form id="transactionForm" class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <label class="block">
-              <span class="mb-1 block text-sm font-medium text-slate-700">日期</span>
-              <input id="dateInput" type="date" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none" />
-            </label>
-            <label class="block">
-              <span class="mb-1 block text-sm font-medium text-slate-700">流向</span>
-              <select id="typeInput" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">日期</label>
+              <input id="dateInput" type="date" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">流向</label>
+              <select id="typeInput" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none">
                 <option value="expense">支出</option>
                 <option value="income">收入</option>
               </select>
-            </label>
-            <label class="block">
-              <span class="mb-1 block text-sm font-medium text-slate-700">分類</span>
-              <select id="categoryInput" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none"></select>
-            </label>
-            <label class="block">
-              <span class="mb-1 block text-sm font-medium text-slate-700">金額</span>
-              <input id="amountInput" type="number" min="0" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none" placeholder="0" />
-            </label>
-            <label class="block md:col-span-2 xl:col-span-2">
-              <span class="mb-1 block text-sm font-medium text-slate-700">備註</span>
-              <input id="noteInput" type="text" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none" placeholder="例如：午餐、薪資入帳" />
-            </label>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">分類</label>
+              <select id="categoryInput" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none"></select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1">金額</label>
+              <input id="amountInput" type="number" min="1" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none" placeholder="請輸入金額" required />
+            </div>
+            <div class="md:col-span-2 xl:col-span-2">
+              <label class="block text-sm font-medium text-slate-700 mb-1">備註</label>
+              <input id="noteInput" type="text" class="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm outline-none" placeholder="例如：午餐吃雞排、發薪水" />
+            </div>
             <div class="flex items-end">
-              <button type="submit" class="w-full rounded-2xl bg-amber-400 px-4 py-2.5 text-sm font-semibold text-slate-950 hover:bg-amber-300">儲存紀錄</button>
+              <button type="submit" class="w-full rounded-xl bg-amber-400 px-3 py-2.5 text-sm font-bold text-slate-950 hover:bg-amber-300 transition">儲存紀錄</button>
             </div>
           </form>
         </section>
       </section>
 
       <aside class="space-y-6">
-        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-xl shadow-slate-900/5 sm:p-6">
-          <h2 class="text-xl font-semibold text-slate-900">歷史清單</h2>
-          <p class="mt-1 text-sm text-slate-500">可依日、週、月切換檢視流水帳。</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <button class="filter-btn rounded-full bg-slate-900 px-4 py-2 text-sm font-medium text-white" data-range="day">日</button>
-            <button class="filter-btn rounded-full bg-slate-200 px-4 py-2 text-sm font-medium text-slate-700" data-range="week">週</button>
-            <button class="filter-btn rounded-full bg-slate-200 px-4 py-2 text-sm font-medium text-slate-700" data-range="month">月</button>
+        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-lg sm:p-6">
+          <h2 class="text-xl font-bold text-slate-900">歷史流水帳清單</h2>
+          <p class="mt-1 text-sm text-slate-500">切換時間視角查看對應帳目。</p>
+          
+          <div class="mt-3 flex gap-1.5">
+            <button class="filter-btn rounded-full bg-slate-900 px-4 py-1.5 text-xs font-semibold text-white" data-range="day">日</button>
+            <button class="filter-btn rounded-full bg-slate-200 px-4 py-1.5 text-xs font-semibold text-slate-700" data-range="week">週</button>
+            <button class="filter-btn rounded-full bg-slate-200 px-4 py-1.5 text-xs font-semibold text-slate-700" data-range="month">月</button>
           </div>
-          <div class="mt-5 max-h-[540px] space-y-3 overflow-auto pr-1" id="historyList"></div>
+
+          <div class="mt-4 max-h-[480px] space-y-2 overflow-y-auto pr-1" id="historyList">
+            <p class="text-slate-400 text-sm">目前尚無流水帳紀錄。</p>
+          </div>
         </section>
 
-        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-xl shadow-slate-900/5 sm:p-6">
-          <h2 class="text-xl font-semibold text-slate-900">理財建議</h2>
-          <p id="insightsText" class="mt-3 rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm leading-6 text-emerald-900"></p>
+        <section class="glass-card rounded-3xl border border-white/70 p-5 shadow-lg sm:p-6">
+          <h2 class="text-xl font-bold text-slate-900">AI 智慧理財建議</h2>
+          <p id="insightsText" class="mt-3 rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm leading-6 text-emerald-900 font-medium">
+            先建立一筆數據，系統會根據你的消費結構提供提醒。
+          </p>
         </section>
       </aside>
     </main>
   </div>
-  <script src="script.js" defer></script>
+
+  <script>
+    // 1. 全域變數與初始化
+    let transactions = JSON.parse(localStorage.getItem('my_spa_money')) || [];
+    let monthlyBudget = Number(localStorage.getItem('my_spa_budget')) || 0;
+    let currentFilter = 'month'; // 預設看當月
+
+    const categories = {
+      expense: ['三餐', '飲品', '點心', '交通', '購物', '娛樂', '日用品', '房租', '醫療', '禮物', '數位', '生活', '其他'],
+      income: ['薪資', '獎金', '投資', '零用錢', '其他']
+    };
+
+    // 取得 DOM 節點
+    const transactionForm = document.getElementById('transactionForm');
+    const dateInput = document.getElementById('dateInput');
+    const typeInput = document.getElementById('typeInput');
+    const categoryInput = document.getElementById('categoryInput');
+    const amountInput = document.getElementById('amountInput');
+    const noteInput = document.getElementById('noteInput');
+    const budgetInput = document.getElementById('budgetInput');
+    const saveBudgetBtn = document.getElementById('saveBudgetBtn');
+    
+    // 圖表變數用來做銷毀防重複渲染
+    let pieChartInstance = null;
+    let lineChartInstance = null;
+
+    // 2. 動態連動「流向」與「分類」
+    function updateCategories() {
+      const type = typeInput.value;
+      const opts = categories[type];
+      categoryInput.innerHTML = opts.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+    typeInput.addEventListener('change', updateCategories);
+    dateInput.value = new Date().toISOString().split('T')[0]; // 預設今天日期
+
+    // 3. 時間篩選邏輯 (日/週/月)
+    function getFilteredData() {
+      const now = new Date();
+      return transactions.filter(t => {
+        const tDate = new Date(t.date);
+        if (currentFilter === 'day') {
+          return tDate.toDateString() === now.toDateString();
+        } else if (currentFilter === 'week') {
+          const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+          return tDate >= oneWeekAgo && tDate <= now;
+        } else { // month
+          return tDate.getMonth() === now.getMonth() && tDate.getFullYear() === now.getFullYear();
+        }
+      });
+    }
+
+    // 4. 核心渲染功能：數據卡片、進度條、流水帳、圖表、理財建議
+    function renderApp() {
+      const filteredData = getFilteredData();
+
+      // 【核心功能】分類計算收入與支出金額
+      const totalIncome = filteredData.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+      const totalExpense = filteredData.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+      const balance = totalIncome - totalExpense;
+
+      // 更新三大數據卡片文字
+      document.getElementById('summaryIncome').textContent = `$${totalIncome.toLocaleString()}`;
+      document.getElementById('summaryExpense').textContent = `$${totalExpense.toLocaleString()}`;
+      document.getElementById('summaryBalance').textContent = `$${balance.toLocaleString()}`;
+
+      // 預算進度條邏輯與顏色警示
+      document.getElementById('budgetText').textContent = `$${totalExpense.toLocaleString()} / $${monthlyBudget.toLocaleString()}`;
+      const budgetBar = document.getElementById('budgetBar');
+      const budgetHint = document.getElementById('budgetHint');
+      
+      if (monthlyBudget > 0) {
+        const percent = Math.min((totalExpense / monthlyBudget) * 100, 100);
+        budgetBar.style.width = `${percent}%`;
+        if (percent >= 100) {
+          budgetBar.className = "h-full rounded-full bg-red-500 transition-all duration-300";
+          budgetHint.className = "mt-2 text-xs text-red-500 font-bold";
+          budgetHint.textContent = "❌ 警告：本月支出已破表！";
+        } else if (percent >= 80) {
+          budgetBar.className = "h-full rounded-full bg-amber-500 transition-all duration-300";
+          budgetHint.className = "mt-2 text-xs text-amber-500 font-bold";
+          budgetHint.textContent = "⚠️ 警示：支出已達預算 80%！";
+        } else {
+          budgetBar.className = "h-full rounded-full bg-emerald-500 transition-all duration-300";
+          budgetHint.className = "mt-2 text-xs text-emerald-600";
+          budgetHint.textContent = "💰 預算狀態良好，請繼續保持。";
+        }
+      } else {
+        budgetBar.style.width = "0%";
+        budgetHint.textContent = "尚未設定每月預算。";
+        budgetHint.className = "mt-2 text-xs text-slate-500";
+      }
+
+      // 歷史流水帳列表渲染 (包含刪除按鈕)
+      const historyList = document.getElementById('historyList');
+      if (filteredData.length === 0) {
+        historyList.innerHTML = `<p class="text-slate-400 text-sm py-4">目前時間視角下尚無紀錄。</p>`;
+      } else {
+        const sorted = [...filteredData].sort((a, b) => new Date(b.date) - new Date(a.date));
+        historyList.innerHTML = sorted.map(t => `
+          <div class="flex items-center justify-between rounded-xl border border-slate-100 bg-white p-3 shadow-sm text-sm">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="inline-block rounded px-2 py-0.5 text-xs font-bold ${t.type === 'income' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}">${t.category}</span>
+                <span class="text-xs text-slate-400">${t.date}</span>
+              </div>
+              <p class="text-slate-600 mt-1 font-medium">${t.note || '無備註'}</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-bold ${t.type === 'income' ? 'text-emerald-600' : 'text-slate-900'}">${t.type === 'income' ? '+' : '-'}$${t.amount}</span>
+              <button onclick="deleteItem('${t.id}')" class="text-xs text-slate-400 hover:text-rose-500 transition">刪除</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 智慧理財建議
+      const insightsText = document.getElementById('insightsText');
+      const snackDrinkExp = filteredData.filter(t => t.type === 'expense' && (t.category === '飲品' || t.category === '點心')).reduce((sum, t) => sum + t.amount, 0);
+      const snackPercent = totalExpense > 0 ? (snackDrinkExp / totalExpense) * 100 : 0;
+
+      if (totalExpense > totalIncome && totalIncome > 0) {
+        insightsText.textContent = "🚨 本月入不敷出！支出大於收入，請調降購物與娛樂預算。";
+        insightsText.className = "mt-3 rounded-2xl border border-red-100 bg-red-50 p-4 text-sm leading-6 text-red-900 font-bold";
+      } else if (snackPercent > 15) {
+        insightsText.textContent = `🧋 提示：本月「飲品+點心」佔總支出 ${snackPercent.toFixed(1)}%！減少手搖飲與下午茶，可省下更多錢。`;
+        insightsText.className = "mt-3 rounded-2xl border border-amber-100 bg-amber-50 p-4 text-sm leading-6 text-amber-900 font-bold";
+      } else {
+        insightsText.textContent = "✅ 太棒了！財務結構非常健康，請繼續維持良好的儲蓄習慣。";
+        insightsText.className = "mt-3 rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm leading-6 text-emerald-900 font-bold";
+      }
+
+      // 渲染 Chart.js 圖表
+      renderCharts(filteredData);
+    }
+
+    // 5. Chart.js 核心繪製邏輯
+    function renderCharts(data) {
+      // 圓餅圖數據處理
+      const expItems = data.filter(t => t.type === 'expense');
+      const catSummary = {};
+      categories.expense.forEach(c => catSummary[c] = 0);
+      expItems.forEach(t => { if(catSummary[t.category] !== undefined) catSummary[t.category] += t.amount; });
+      const pieLabels = Object.keys(catSummary).filter(c => catSummary[c] > 0);
+      const pieValues = pieLabels.map(c => catSummary[c]);
+
+      if(pieChartInstance) pieChartInstance.destroy();
+      const ctxPie = document.getElementById('expenseCategoryChart').getContext('2d');
+      if (pieValues.length > 0) {
+        pieChartInstance = new Chart(ctxPie, {
+          type: 'pie',
+          data: {
+            labels: pieLabels,
+            datasets: [{
+              data: pieValues,
+              backgroundColor: ['#f87171', '#fb923c', '#fbbf24', '#facc15', '#4ade80', '#4cc9f0', '#60a5fa', '#818cf8', '#a78bfa', '#c084fc', '#f472b6', '#94a3b8', '#cbd5e1']
+            }]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      } else {
+        ctxPie.clearRect(0, 0, 300, 300);
+      }
+
+      // 折線圖數據處理 (按日期升序)
+      const dateMap = {};
+      data.forEach(t => {
+        if(!dateMap[t.date]) dateMap[t.date] = { income: 0, expense: 0 };
+        dateMap[t.date][t.type] += t.amount;
+      });
+      const sortedDates = Object.keys(dateMap).sort();
+      
+      if(lineChartInstance) lineChartInstance.destroy();
+      const ctxLine = document.getElementById('monthlyTrendChart').getContext('2d');
+      lineChartInstance = new Chart(ctxLine, {
+        type: 'line',
+        data: {
+          labels: sortedDates.map(d => d.slice(5)), // 縮短日期字串
+          datasets: [
+            { label: '收入', data: sortedDates.map(d => dateMap[d].income), borderColor: '#10b981', tension: 0.15, fill: false },
+            { label: '支出', data: sortedDates.map(d => dateMap[d].expense), borderColor: '#ef4444', tension: 0.15, fill: false }
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    // 6. 表單提交監聽 (新增項目至對應收入/支出)
+    transactionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const amt = Math.floor(Number(amountInput.value));
+      if (amt <= 0) return;
+
+      const newItem = {
+        id: Date.now().toString(),
+        date: dateInput.value,
+        type: typeInput.value,
+        category: categoryInput.value,
+        amount: amt,
+        note: noteInput.value.trim()
+      };
+
+      transactions.push(newItem);
+      localStorage.setItem('my_spa_money', JSON.stringify(transactions));
+      
+      // 重設金額與備註輸入框
+      amountInput.value = '';
+      noteInput.value = '';
+      renderApp();
+    });
+
+    // 預算儲存監聽
+    saveBudgetBtn.addEventListener('click', () => {
+      const val = Math.floor(Number(budgetInput.value));
+      if (val < 0) return;
+      monthlyBudget = val;
+      localStorage.setItem('my_spa_budget', monthlyBudget);
+      budgetInput.value = '';
+      renderApp();
+    });
+
+    // 歷史清單時間範圍切換
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.className = "filter-btn rounded-full bg-slate-200 px-4 py-1.5 text-xs font-semibold text-slate-700");
+        e.target.className = "filter-btn rounded-full bg-slate-900 px-4 py-1.5 text-xs font-semibold text-white";
+        currentFilter = e.target.dataset.range;
+        renderApp();
+      });
+    });
+
+    // 刪除項目功能
+    window.deleteItem = function(id) {
+      transactions = transactions.filter(t => t.id !== id);
+      localStorage.setItem('my_spa_money', JSON.stringify(transactions));
+      renderApp();
+    };
+
+    // 啟動應用程式
+    updateCategories();
+    renderApp();
+  </script>
 </body>
 </html>
